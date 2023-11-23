@@ -1,0 +1,45 @@
+/* Stil für die äußere Karte (Card) */
+section {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+/* Stil für den Titel (h3) */
+h3 {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+/* Stil für die Liste (ul) */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Stil für die Listenelemente (li) */
+li {
+  margin-bottom: 4px;
+  color: #555;
+}
+
+/* Stil für den Löschen-Button */
+button {
+  background-color: #ff5757;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Hover-Effekt für den Löschen-Button */
+button:hover {
+  background-color: #d32f2f;
+}
