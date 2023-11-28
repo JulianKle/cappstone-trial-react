@@ -1,18 +1,17 @@
-import "./App.css";
 import { useState } from "react";
 import { Formular } from "./components/formular/Formular.js";
 import { Card } from "./components/card/Card.js";
 import { uid } from "uid";
 import { SearchAssessment } from "./components/searchAssessment/SearchAssessment";
+import { Checkbox } from "./components/RiskAssessment/RiskAssessment.js";
 
 function App() {
   const [assessments, setAssessments] = useState([]);
-  const [filter, setFilter] = useState([]);
-  const [noFilter, setNoFilter] = useState(true);
+  const [filteredAssessment, setFilteredAssessments] = useState([]);
+  const [filterNoYes, setFilterNoYes] = useState(true);
 
   function handleNewAssessment(newAssessment) {
     const updatedAssessment = [{ id: uid(), ...newAssessment }, ...assessments];
-    console.log(updatedAssessment);
     setAssessments(updatedAssessment);
   }
 
@@ -25,7 +24,7 @@ function App() {
   }
 
   function filterAssessment(filterFor) {
-    setFilter(
+    setFilteredAssessments(
       assessments.filter((assessment) => {
         return assessment.title === filterFor;
       })
@@ -33,14 +32,12 @@ function App() {
   }
 
   function noFilterFalse() {
-    setNoFilter(false);
+    setFilterNoYes(false);
   }
 
   function noFilterTrue() {
-    setNoFilter(true);
+    setFilterNoYes(true);
   }
-
-  console.log(assessments);
 
   return (
     <>
@@ -50,16 +47,17 @@ function App() {
         onOverview={noFilterTrue}
       />
       <Formular handleNewAssessment={handleNewAssessment} />
-      {noFilter ? (
+      <Checkbox />
+      {filterNoYes ? (
         <Card
           assessments={assessments}
           onDeleteAssessment={handleDeleteAssessment}
         />
       ) : (
-        filter.map((filteredAssessment) => (
+        filteredAssessment.map((searchedAssessment) => (
           <Card
-            key={filteredAssessment.id}
-            assessments={[filteredAssessment]}
+            key={searchedAssessment.id}
+            assessments={[searchedAssessment]}
             onDeleteAssessment={handleDeleteAssessment}
           />
         ))
