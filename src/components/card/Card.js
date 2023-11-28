@@ -53,16 +53,16 @@ function getColorCode(assessment) {
     assessment.socialScoring ||
     assessment.biometricIdentification
   ) {
-    return "#D9534F"; // Unacceptable Risk - Dark Red
+    return "#8B0000"; // Dunkles Weinrot für Unacceptable Risk
   } else if (
     assessment.useUnderSafetyRegulation ||
     assessment.useInCertainArea
   ) {
-    return "#F0AD4E"; // High Risk - Dark Orange
+    return "#A05600"; // Dunkles Orange für High Risk
   } else if (assessment.useGenAI) {
-    return "#337AB7"; // Only use of GenAI - Dark Blue
+    return "#1F3A4D"; // Dunkles Blau für Only use of GenAI
   } else if (assessment.noneAboveApplies) {
-    return "#5CB85C"; // No special classification - Dark Green
+    return "#3D8B37"; // Dunkles Grün für No special classification
   }
 }
 
