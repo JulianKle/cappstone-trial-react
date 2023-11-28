@@ -54,13 +54,10 @@ function App() {
           onDeleteAssessment={handleDeleteAssessment}
         />
       ) : (
-        filteredAssessment.map((searchedAssessment) => (
-          <Card
-            key={searchedAssessment.id}
-            assessments={[searchedAssessment]}
-            onDeleteAssessment={handleDeleteAssessment}
-          />
-        ))
+        <Card
+          assessments={filteredAssessment}
+          onDeleteAssessment={handleDeleteAssessment}
+        />
       )}
     </>
   );

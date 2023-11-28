@@ -14,12 +14,44 @@ const StyledForm = styled.form`
 `;
 
 const FormField = styled.div`
-  flex: 0 0 48%; /* Zwei Eingabefelder nebeneinander */
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 
   label {
     margin-bottom: 8px;
     font-size: 18px;
+    display: block;
+  }
+
+  .group-label {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #61dafb;
+    padding-bottom: 8px;
+  }
+
+  .checkbox-group {
+    margin-bottom: 16px;
+  }
+
+  .checkbox-items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+  }
+
+  input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+  }
+
+  .checkbox-label {
+    font-size: 16px;
   }
 
   input {
@@ -31,6 +63,14 @@ const FormField = styled.div`
     background-color: #282c34;
     color: #61dafb;
     outline: none;
+
+    .group-label {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #61dafb;
+      padding-bottom: 8px;
+    }
 
     &:focus {
       border-color: #38a169;
@@ -113,99 +153,101 @@ export function Formular({ handleNewAssessment }) {
       </FormField>
 
       <FormField>
-        <label htmlFor="cognitiveBehavior">
-          Is the system capable of cognitive behavioral manipulation of
-          individuals or certain vulnerable groups (e.g. children)?
-        </label>
-        <input
-          id="cognitiveBehavior"
-          name="cognitiveBehavior"
-          type="checkbox"
-          checked={handleCheckBox.cognitiveBehavior}
-          onChange={() => handleCheckboxChange("cognitiveBehavior")}
-        />
-      </FormField>
+        <div>
+          <div className="group-label">Unacceptable Risk</div>
+          <label htmlFor="cognitiveBehavior">
+            Is the system capable of cognitive behavioral manipulation of
+            individuals or certain vulnerable groups (e.g. children)?
+          </label>
+          <input
+            id="cognitiveBehavior"
+            name="cognitiveBehavior"
+            type="checkbox"
+            checked={handleCheckBox.cognitiveBehavior}
+            onChange={() => handleCheckboxChange("cognitiveBehavior")}
+          />
+          <label htmlFor="socialScoring">
+            Is the system able to classify people on the basis of behavior,
+            socio-economic status and personal characteristics (social scoring)?
+          </label>
+          <input
+            id="socialScoring"
+            name="socialScoring"
+            type="checkbox"
+            checked={handleCheckBox.socialScoring}
+            onChange={() => handleCheckboxChange("socialScoring")}
+          />
+          <label htmlFor="biometricIdentification">
+            Is the system capable of performing real-time remote biometric
+            identification systems, for example facial recognition?
+          </label>
+          <input
+            id="biometricIdentification"
+            name="biometricIdentification"
+            type="checkbox"
+            checked={handleCheckBox.biometricIdentification}
+            onChange={() => handleCheckboxChange("biometricIdentification")}
+          />
+        </div>
 
-      <FormField>
-        <label htmlFor="socialScoring">
-          Is the system able to classify people on the basis of behavior,
-          socio-economic status and personal characteristics (social scoring)?
-        </label>
-        <input
-          id="socialScoring"
-          name="socialScoring"
-          type="checkbox"
-          checked={handleCheckBox.socialScoring}
-          onChange={() => handleCheckboxChange("socialScoring")}
-        />
-      </FormField>
-      <FormField>
-        <label htmlFor="biometricIdentification">
-          Is the system capable of performing real-time remote biometric
-          identification systems, for example facial recognition?
-        </label>
-        <input
-          id="biometricIdentification"
-          name="biometricIdentification"
-          type="checkbox"
-          checked={handleCheckBox.biometricIdentification}
-          onChange={() => handleCheckboxChange("biometricIdentification")}
-        />
-      </FormField>
-      <FormField>
-        <label htmlFor="useUnderSafetyRegulation">
-          Will the system be used in products that fall under EU product safety
-          regulations? This includes toys, aviation, vehicles, medical devices
-          and elevators.
-        </label>
-        <input
-          id="useUnderSafetyRegulation"
-          name="useUnderSafetyRegulation"
-          type="checkbox"
-          checked={handleCheckBox.useUnderSafetyRegulation}
-          onChange={() => handleCheckboxChange("useUnderSafetyRegulation")}
-        />{" "}
-      </FormField>
-      <FormField>
-        <label htmlFor="useInCertainArea">
-          Is the system used in one of the following areas? - Biometric
-          identification and categorization of natural persons; - management and
-          operation of critical infrastructure; - Education and training; -
-          Employment, management of employees and access to self-employment; -
-          access to and use of essential private and public services and
-          benefits; - Law enforcement; - Migration, asylum and border control
-          management; - Support in the interpretation and application of laws.
-        </label>
-        <input
-          id="useInCertainArea"
-          name="useInCertainArea"
-          type="checkbox"
-          checked={handleCheckBox.useInCertainArea}
-          onChange={() => handleCheckboxChange("useInCertainArea")}
-        />{" "}
-      </FormField>
-      <FormField>
-        <label htmlFor="useGenAI">
-          Will the system use or be based on Generative Foundation models such
-          as ChatGPT?
-        </label>
-        <input
-          id="useGenAI"
-          name="useGenAI"
-          type="checkbox"
-          checked={handleCheckBox.useGenAI}
-          onChange={() => handleCheckboxChange("useGenAI")}
-        />{" "}
-      </FormField>
-      <FormField>
-        <label htmlFor="noneAboveApplies">None of the above applies.</label>
-        <input
-          id="noneAboveApplies"
-          name="noneAboveApplies"
-          type="checkbox"
-          checked={handleCheckBox.noneAboveApplies}
-          onChange={() => handleCheckboxChange("noneAboveApplies")}
-        />{" "}
+        <div>
+          <div className="group-label">High Risk</div>
+          <label htmlFor="useUnderSafetyRegulation">
+            Will the system be used in products that fall under EU product
+            safety regulations? This includes toys, aviation, vehicles, medical
+            devices and elevators.
+          </label>
+          <input
+            id="useUnderSafetyRegulation"
+            name="useUnderSafetyRegulation"
+            type="checkbox"
+            checked={handleCheckBox.useUnderSafetyRegulation}
+            onChange={() => handleCheckboxChange("useUnderSafetyRegulation")}
+          />{" "}
+          <label htmlFor="useInCertainArea">
+            Is the system used in one of the following areas? - Biometric
+            identification and categorization of natural persons; - management
+            and operation of critical infrastructure; - Education and training;
+            - Employment, management of employees and access to self-employment;
+            - access to and use of essential private and public services and
+            benefits; - Law enforcement; - Migration, asylum and border control
+            management; - Support in the interpretation and application of laws.
+          </label>
+          <input
+            id="useInCertainArea"
+            name="useInCertainArea"
+            type="checkbox"
+            checked={handleCheckBox.useInCertainArea}
+            onChange={() => handleCheckboxChange("useInCertainArea")}
+          />{" "}
+        </div>
+
+        <div>
+          <div className="group-label">GenAI</div>
+          <label htmlFor="useGenAI">
+            Will the system use or be based on Generative Foundation models such
+            as ChatGPT?
+          </label>
+          <input
+            id="useGenAI"
+            name="useGenAI"
+            type="checkbox"
+            checked={handleCheckBox.useGenAI}
+            onChange={() => handleCheckboxChange("useGenAI")}
+          />{" "}
+        </div>
+
+        <div>
+          <div className="group-label">Low Risk</div>
+          <label htmlFor="noneAboveApplies">None of the above applies.</label>
+          <input
+            id="noneAboveApplies"
+            name="noneAboveApplies"
+            type="checkbox"
+            checked={handleCheckBox.noneAboveApplies}
+            onChange={() => handleCheckboxChange("noneAboveApplies")}
+          />{" "}
+        </div>
       </FormField>
       <SubmitButton type="submit">Submit</SubmitButton>
     </StyledForm>
