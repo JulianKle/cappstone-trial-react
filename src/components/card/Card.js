@@ -47,11 +47,33 @@ const CardSection = styled.section`
   }
 `;
 
+function getColorCode(assessment) {
+  if (
+    assessment.cognitiveBehavior ||
+    assessment.socialScoring ||
+    assessment.biometricIdentification
+  ) {
+    return "#D9534F"; // Unacceptable Risk - Dark Red
+  } else if (
+    assessment.useUnderSafetyRegulation ||
+    assessment.useInCertainArea
+  ) {
+    return "#F0AD4E"; // High Risk - Dark Orange
+  } else if (assessment.useGenAI) {
+    return "#337AB7"; // Only use of GenAI - Dark Blue
+  } else if (assessment.noneAboveApplies) {
+    return "#5CB85C"; // No special classification - Dark Green
+  }
+}
+
 export function Card({ assessments, onDeleteAssessment }) {
   return (
     <>
       {assessments.map((assessment) => (
-        <CardSection key={assessment.id}>
+        <CardSection
+          key={assessment.id}
+          style={{ backgroundColor: getColorCode(assessment) }}
+        >
           <h3>{assessment.title}</h3>
           <ul>
             <li>{assessment.editor}</li>
@@ -78,5 +100,3 @@ export function Card({ assessments, onDeleteAssessment }) {
     </>
   );
 }
-
-export default Card;
