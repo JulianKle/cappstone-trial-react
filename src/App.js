@@ -3,7 +3,6 @@ import { Formular } from "./components/formular/Formular.js";
 import { Card } from "./components/card/Card.js";
 import { uid } from "uid";
 import { SearchAssessment } from "./components/searchAssessment/SearchAssessment";
-import { Checkbox } from "./components/RiskAssessment/RiskAssessment.js";
 
 function App() {
   const [assessments, setAssessments] = useState([]);
@@ -38,6 +37,8 @@ function App() {
   function noFilterTrue() {
     setFilterNoYes(true);
   }
+
+  console.log(assessments);
 
   return (
     <>

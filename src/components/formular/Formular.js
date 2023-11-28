@@ -198,11 +198,7 @@ export function Formular({ handleNewAssessment }) {
         />{" "}
       </FormField>
       <FormField>
-        <label htmlFor="noneAboveApplies">
-          Will the system be used in products that fall under EU product safety
-          regulations? This includes toys, aviation, vehicles, medical devices
-          and elevators.
-        </label>
+        <label htmlFor="noneAboveApplies">None of the above applies.</label>
         <input
           id="noneAboveApplies"
           name="noneAboveApplies"

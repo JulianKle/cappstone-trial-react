@@ -57,6 +57,21 @@ export function Card({ assessments, onDeleteAssessment }) {
             <li>{assessment.editor}</li>
             <li>{assessment.company}</li>
           </ul>
+          {assessment.cognitiveBehavior ||
+          assessment.socialScoring ||
+          assessment.biometricIdentification ? (
+            <p>Result: Unacceptable Risk</p>
+          ) : assessment.useUnderSafetyRegulation ||
+            assessment.useInCertainArea ? (
+            <p>Result: High Risk</p>
+          ) : assessment.useGenAI ? (
+            <p>Result: Only use of GenAI. Extended transparency obligations.</p>
+          ) : assessment.noneAboveApplies ? (
+            <p>
+              Result: No special classification. Only minor transparency
+              obligations.
+            </p>
+          ) : null}
           <button onClick={() => onDeleteAssessment(assessment.id)}>X</button>
         </CardSection>
       ))}
