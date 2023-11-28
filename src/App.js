@@ -47,7 +47,6 @@ function App() {
         onOverview={noFilterTrue}
       />
       <Formular handleNewAssessment={handleNewAssessment} />
-      <Checkbox />
       {filterNoYes ? (
         <Card
           assessments={assessments}
