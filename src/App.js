@@ -71,7 +71,9 @@ function App() {
         onSearch={noFilterFalse}
         onOverview={noFilterTrue}
       />
-      <Formular handleNewAssessment={handleNewAssessment} />
+      {!editingAssessment && (
+        <Formular handleNewAssessment={handleNewAssessment} />
+      )}
       {editingAssessment ? (
         <Formular
           handleNewAssessment={handleUpdateAssessment}
