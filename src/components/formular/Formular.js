@@ -101,9 +101,6 @@ export function Formular({ handleNewAssessment, initialData }) {
     editor: "",
     company: "",
     status: "",
-  });
-
-  const [handleCheckBox, setHandleCheckbox] = useState({
     cognitiveBehavior: false,
     socialScoring: false,
     biometricIdentification: false,
@@ -121,16 +118,13 @@ export function Formular({ handleNewAssessment, initialData }) {
         editor: initialData.editor || "",
         company: initialData.company || "",
         status: initialData.status || "",
-      });
-
-      setHandleCheckbox({
-        cognitiveBehavior: initialData.cognitiveBehavior,
-        socialScoring: initialData.socialScoring,
-        biometricIdentification: initialData.biometricIdentification,
-        useUnderSafetyRegulation: initialData.useUnderSafetyRegulation,
-        useInCertainArea: initialData.useInCertainArea,
-        useGenAI: initialData.useGenAI,
-        noneAboveApplies: initialData.noneAboveApplies,
+        cognitiveBehavior: initialData.cognitiveBehavior || false,
+        socialScoring: initialData.socialScoring || false,
+        biometricIdentification: initialData.biometricIdentification || false,
+        useUnderSafetyRegulation: initialData.useUnderSafetyRegulation || false,
+        useInCertainArea: initialData.useInCertainArea || false,
+        useGenAI: initialData.useGenAI || false,
+        noneAboveApplies: initialData.noneAboveApplies || false,
       });
     }
   }, [initialData]);
@@ -144,9 +138,9 @@ export function Formular({ handleNewAssessment, initialData }) {
   }
 
   function handleCheckboxChange(checkboxName) {
-    setHandleCheckbox({
-      ...handleCheckBox,
-      [checkboxName]: !handleCheckBox[checkboxName],
+    setFormData({
+      ...formData,
+      [checkboxName]: !formData[checkboxName],
     });
   }
 
@@ -155,13 +149,6 @@ export function Formular({ handleNewAssessment, initialData }) {
 
     const updatedData = {
       ...formData,
-      cognitiveBehavior: handleCheckBox.cognitiveBehavior,
-      socialScoring: handleCheckBox.socialScoring,
-      biometricIdentification: handleCheckBox.biometricIdentification,
-      useUnderSafetyRegulation: handleCheckBox.useUnderSafetyRegulation,
-      useInCertainArea: handleCheckBox.useInCertainArea,
-      useGenAI: handleCheckBox.useGenAI,
-      noneAboveApplies: handleCheckBox.noneAboveApplies,
     };
 
     handleNewAssessment(updatedData);
@@ -217,7 +204,7 @@ export function Formular({ handleNewAssessment, initialData }) {
             id="cognitiveBehavior"
             name="cognitiveBehavior"
             type="checkbox"
-            checked={handleCheckBox.cognitiveBehavior}
+            checked={formData.cognitiveBehavior}
             onChange={() => handleCheckboxChange("cognitiveBehavior")}
           />
           <label htmlFor="socialScoring">
@@ -228,7 +215,7 @@ export function Formular({ handleNewAssessment, initialData }) {
             id="socialScoring"
             name="socialScoring"
             type="checkbox"
-            checked={handleCheckBox.socialScoring}
+            checked={formData.socialScoring}
             onChange={() => handleCheckboxChange("socialScoring")}
           />
           <label htmlFor="biometricIdentification">
@@ -239,7 +226,7 @@ export function Formular({ handleNewAssessment, initialData }) {
             id="biometricIdentification"
             name="biometricIdentification"
             type="checkbox"
-            checked={handleCheckBox.biometricIdentification}
+            checked={formData.biometricIdentification}
             onChange={() => handleCheckboxChange("biometricIdentification")}
           />
         </div>
@@ -255,9 +242,9 @@ export function Formular({ handleNewAssessment, initialData }) {
             id="useUnderSafetyRegulation"
             name="useUnderSafetyRegulation"
             type="checkbox"
-            checked={handleCheckBox.useUnderSafetyRegulation}
+            checked={formData.useUnderSafetyRegulation}
             onChange={() => handleCheckboxChange("useUnderSafetyRegulation")}
-          />{" "}
+          />
           <label htmlFor="useInCertainArea">
             Is the system used in one of the following areas? - Biometric
             identification and categorization of natural persons; - management
@@ -271,9 +258,9 @@ export function Formular({ handleNewAssessment, initialData }) {
             id="useInCertainArea"
             name="useInCertainArea"
             type="checkbox"
-            checked={handleCheckBox.useInCertainArea}
+            checked={formData.useInCertainArea}
             onChange={() => handleCheckboxChange("useInCertainArea")}
-          />{" "}
+          />
         </div>
 
         <div>
@@ -286,9 +273,9 @@ export function Formular({ handleNewAssessment, initialData }) {
             id="useGenAI"
             name="useGenAI"
             type="checkbox"
-            checked={handleCheckBox.useGenAI}
+            checked={formData.useGenAI}
             onChange={() => handleCheckboxChange("useGenAI")}
-          />{" "}
+          />
         </div>
 
         <div>
@@ -298,9 +285,9 @@ export function Formular({ handleNewAssessment, initialData }) {
             id="noneAboveApplies"
             name="noneAboveApplies"
             type="checkbox"
-            checked={handleCheckBox.noneAboveApplies}
+            checked={formData.noneAboveApplies}
             onChange={() => handleCheckboxChange("noneAboveApplies")}
-          />{" "}
+          />
         </div>
       </FormField>
       <SubmitButton type="submit">Submit</SubmitButton>
