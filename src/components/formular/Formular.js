@@ -1,7 +1,7 @@
 // Formular.js
 import React from "react";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const StyledForm = styled.form`
   display: flex;
@@ -95,7 +95,14 @@ const SubmitButton = styled.button`
   }
 `;
 
-export function Formular({ handleNewAssessment }) {
+export function Formular({ handleNewAssessment, initialData }) {
+  const [formData, setFormData] = useState({
+    title: "",
+    editor: "",
+    company: "",
+    status: "",
+  });
+
   const [handleCheckBox, setHandleCheckbox] = useState({
     cognitiveBehavior: false,
     socialScoring: false,
@@ -105,6 +112,36 @@ export function Formular({ handleNewAssessment }) {
     useGenAI: false,
     noneAboveApplies: false,
   });
+
+  useEffect(() => {
+    // Setze die Checkboxen basierend auf den initialen Daten
+    if (initialData) {
+      setFormData({
+        title: initialData.title || "",
+        editor: initialData.editor || "",
+        company: initialData.company || "",
+        status: initialData.status || "",
+      });
+
+      setHandleCheckbox({
+        cognitiveBehavior: initialData.cognitiveBehavior,
+        socialScoring: initialData.socialScoring,
+        biometricIdentification: initialData.biometricIdentification,
+        useUnderSafetyRegulation: initialData.useUnderSafetyRegulation,
+        useInCertainArea: initialData.useInCertainArea,
+        useGenAI: initialData.useGenAI,
+        noneAboveApplies: initialData.noneAboveApplies,
+      });
+    }
+  }, [initialData]);
+
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  }
 
   function handleCheckboxChange(checkboxName) {
     setHandleCheckbox({
@@ -116,11 +153,8 @@ export function Formular({ handleNewAssessment }) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-
     const updatedData = {
-      ...data,
+      ...formData,
       cognitiveBehavior: handleCheckBox.cognitiveBehavior,
       socialScoring: handleCheckBox.socialScoring,
       biometricIdentification: handleCheckBox.biometricIdentification,
@@ -137,19 +171,39 @@ export function Formular({ handleNewAssessment }) {
     <StyledForm onSubmit={handleSubmit}>
       <FormField>
         <label htmlFor="title">Assessment Title:</label>
-        <input type="text" name="title" />
+        <input
+          type="text"
+          name="title"
+          value={formData.title}
+          onChange={handleInputChange}
+        />
       </FormField>
       <FormField>
         <label htmlFor="editor">Editor:</label>
-        <input type="text" name="editor" />
+        <input
+          type="text"
+          name="editor"
+          value={formData.editor}
+          onChange={handleInputChange}
+        />
       </FormField>
       <FormField>
         <label htmlFor="company">Company:</label>
-        <input type="text" name="company" />
+        <input
+          type="text"
+          name="company"
+          value={formData.company}
+          onChange={handleInputChange}
+        />
       </FormField>
       <FormField>
         <label htmlFor="status">Status:</label>
-        <input type="text" name="status" />
+        <input
+          type="text"
+          name="status"
+          value={formData.status}
+          onChange={handleInputChange}
+        />
       </FormField>
 
       <FormField>

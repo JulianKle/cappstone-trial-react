@@ -8,6 +8,7 @@ function App() {
   const [assessments, setAssessments] = useState([]);
   const [filteredAssessment, setFilteredAssessments] = useState([]);
   const [filterNoYes, setFilterNoYes] = useState(true);
+  const [editingAssessment, setEditingAssessment] = useState(null);
 
   function handleNewAssessment(newAssessment) {
     const updatedAssessment = [{ id: uid(), ...newAssessment }, ...assessments];
@@ -31,14 +32,37 @@ function App() {
   }
 
   function noFilterFalse() {
-    setFilterNoYes(false);
+    setFilterNoYes(!filterNoYes);
   }
 
   function noFilterTrue() {
     setFilterNoYes(true);
   }
 
-  console.log(assessments);
+  function handleEditAssessment(id) {
+    // Finde das zu bearbeitende Assessment anhand der ID
+    const assessmentToEdit = assessments.find(
+      (assessment) => assessment.id === id
+    );
+
+    // Setze das zu bearbeitende Assessment als Zustand für die Bearbeitung
+    setEditingAssessment(assessmentToEdit);
+  }
+
+  function handleUpdateAssessment(updatedData) {
+    // Aktualisiere das zu bearbeitende Assessment
+    const updatedAssessments = assessments.map((assessment) =>
+      assessment.id === editingAssessment.id
+        ? { ...assessment, ...updatedData }
+        : assessment
+    );
+
+    // Setze den Zustand zurück
+    setEditingAssessment(null);
+
+    // Aktualisiere den Zustand mit den neuen Daten
+    setAssessments(updatedAssessments);
+  }
 
   return (
     <>
@@ -48,15 +72,22 @@ function App() {
         onOverview={noFilterTrue}
       />
       <Formular handleNewAssessment={handleNewAssessment} />
-      {filterNoYes ? (
+      {editingAssessment ? (
+        <Formular
+          handleNewAssessment={handleUpdateAssessment}
+          initialData={editingAssessment}
+        />
+      ) : filterNoYes ? (
         <Card
           assessments={assessments}
           onDeleteAssessment={handleDeleteAssessment}
+          onEditAssessment={handleEditAssessment}
         />
       ) : (
         <Card
           assessments={filteredAssessment}
           onDeleteAssessment={handleDeleteAssessment}
+          onEditAssessment={handleEditAssessment}
         />
       )}
     </>

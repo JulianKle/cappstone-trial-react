@@ -66,7 +66,7 @@ function getColorCode(assessment) {
   }
 }
 
-export function Card({ assessments, onDeleteAssessment }) {
+export function Card({ assessments, onDeleteAssessment, onEditAssessment }) {
   return (
     <>
       {assessments.map((assessment) => (
@@ -95,6 +95,7 @@ export function Card({ assessments, onDeleteAssessment }) {
             </p>
           ) : null}
           <button onClick={() => onDeleteAssessment(assessment.id)}>X</button>
+          <button onClick={() => onEditAssessment(assessment.id)}>Edit</button>
         </CardSection>
       ))}
     </>
