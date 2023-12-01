@@ -32,7 +32,7 @@ function App() {
   }
 
   function noFilterFalse() {
-    setFilterNoYes(!filterNoYes);
+    setFilterNoYes(false);
   }
 
   function noFilterTrue() {
